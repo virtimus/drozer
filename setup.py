@@ -125,7 +125,9 @@ def get_version():
 	elif platform != "win32":
 		return
 	
-	return subprocess.check_output(version_cmd).split('-', 1)[0]
+	#return subprocess.check_output(version_cmd).split('-', 1)[0]
+	#https://github.com/FSecureLABS/drozer/issues/357#issuecomment-546886215
+	return subprocess.check_output(version_cmd, shell=True).split('-', 1)[0]
 
 setuptools.setup(
   name = meta.name,
