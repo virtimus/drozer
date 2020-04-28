@@ -92,7 +92,7 @@ class ModuleManager(cli.Base):
         
         if arguments.nonInteractive:
             if len(repositories) < 1:
-                Repository.create(path)
+                Repository.create("/tmp/drozer-repo1")
             return repositories[0]
         
         if len(repositories) == 1:
