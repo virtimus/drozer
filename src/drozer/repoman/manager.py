@@ -29,7 +29,7 @@ class ModuleManager(cli.Base):
     def do_install(self, arguments):
         """install a new module"""
         
-        repository = self.__choose_repo()
+        repository = self.__choose_repo(arguments)
         
         if repository != None:
             installer = ModuleInstaller(repository)
@@ -82,7 +82,7 @@ class ModuleManager(cli.Base):
             except cli.UsageError:
                 self._parser.print_help()
     
-    def __choose_repo(self):
+    def __choose_repo(self,arguments):
         """
         Return the path of a repository, either the only repo or presenting the user
         with a choice.
