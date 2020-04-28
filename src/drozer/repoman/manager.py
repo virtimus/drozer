@@ -22,6 +22,7 @@ class ModuleManager(cli.Base):
         self._parser.add_argument("-d", "--descriptions", action="store_true", default=False, help="include descriptions when searching modules (search only)")
         self._parser.add_argument("options", nargs="+", default="")
         self._parser.add_argument("-f", "--force", action="store_true", default=False, help="force install modules from the repositories (install only)")
+        self._parser.add_argument("-ni", "--nonInteractive", action="store_true", dest="nonInteractive", default=False)
 
         self._parser.error = self.__parse_error
         
@@ -88,6 +89,11 @@ class ModuleManager(cli.Base):
         """
         
         repositories = Repository.all()
+        
+        if arguments.nonInteractive:
+            if len(repositories) < 1:
+                Repository.create(path)
+            return repositories[0]
         
         if len(repositories) == 1:
             return repositories[0]
